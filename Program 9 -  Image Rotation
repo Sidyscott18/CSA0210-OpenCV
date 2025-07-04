@@ -1,0 +1,22 @@
+import cv2
+
+image = cv2.imread(r'C:/Users/user/Downloads/Web_of_Spider-Man_Vol_1_129-1.png')
+(h, w) = image.shape[:2]
+center = (w // 2, h // 2)
+
+# Rotate clockwise by 45 degrees
+M_clockwise = cv2.getRotationMatrix2D(center, -45, 1.0)
+rotated_clockwise = cv2.warpAffine(image, M_clockwise, (w, h))
+
+# Rotate counter-clockwise by 45 degrees
+M_counter = cv2.getRotationMatrix2D(center, 45, 1.0)
+rotated_counter = cv2.warpAffine(image, M_counter, (w, h))
+
+cv2.imshow('Original Image', image)
+cv2.imshow('Rotated Clockwise (45°)', rotated_clockwise)
+cv2.imshow('Rotated Counter-Clockwise (45°)', rotated_counter)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+cv2.imwrite('rotated_clockwise.png', rotated_clockwise)
+cv2.imwrite('rotated_counter_clockwise.png', rotated_counter)
