@@ -1,0 +1,47 @@
+import cv2
+
+cap = cv2.VideoCapture(r'C:/Users/user/Downloads/your_video.mp4')
+
+if not cap.isOpened():
+    print("Error: Could not open video.")
+    exit()
+
+# Normal speed
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    cv2.imshow('Normal Speed', frame)
+    if cv2.waitKey(30) & 0xFF == 27:  # 30 ms delay ~ normal speed
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+cap = cv2.VideoCapture(r'C:/Users/user/Downloads/your_video.mp4')
+
+# Slow motion
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    cv2.imshow('Slow Motion', frame)
+    if cv2.waitKey(60) & 0xFF == 27:  # 60 ms delay ~ slower playback
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+cap = cv2.VideoCapture(r'C:/Users/user/Downloads/your_video.mp4')
+
+# Fast motion
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    cv2.imshow('Fast Motion', frame)
+    if cv2.waitKey(10) & 0xFF == 27:  # 10 ms delay ~ faster playback
+        break
+
+cap.release()
+cv2.destroyAllWindows()
