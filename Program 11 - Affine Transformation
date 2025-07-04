@@ -1,0 +1,15 @@
+import cv2
+import numpy as np
+image = cv2.imread('C:/Users/user/Downloads/Web_of_Spider-Man_Vol_1_129-1.png')
+rows, cols, ch = image.shape
+pts1 = np.float32([[50, 50], [200, 50], [50, 200]])
+pts2 = np.float32([[10, 100], [200, 50], [100, 250]])
+M = cv2.getAffineTransform(pts1, pts2)
+affine_transformed = cv2.warpAffine(image, M, (cols, rows))
+cv2.imshow('Original Image', image)
+cv2.imshow('Affine Transformed Image', affine_transformed)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+cv2.imwrite('affine_output.jpg', affine_transformed)
+
+
