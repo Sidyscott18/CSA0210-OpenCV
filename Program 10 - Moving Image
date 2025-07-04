@@ -1,0 +1,16 @@
+import cv2
+import numpy as np
+
+image = cv2.imread(r'C:/Users/user/Downloads/Web_of_Spider-Man_Vol_1_129-1.png')
+rows, cols = image.shape[:2]
+
+# Move image 100 pixels right and 50 pixels down
+M = np.float32([[1, 0, 100], [0, 1, 50]])
+shifted_image = cv2.warpAffine(image, M, (cols, rows))
+
+cv2.imshow('Original Image', image)
+cv2.imshow('Shifted Image', shifted_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+cv2.imwrite('shifted_output.png', shifted_image)
