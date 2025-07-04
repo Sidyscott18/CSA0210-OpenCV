@@ -1,0 +1,52 @@
+import cv2
+
+# Capture video from the default webcam (0)
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Error: Could not open webcam.")
+    exit()
+
+# Normal speed display
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    cv2.imshow('Normal Speed (Press ESC to continue)', frame)
+    if cv2.waitKey(30) & 0xFF == 27:  # ESC key
+        break
+
+cv2.destroyAllWindows()
+
+# Slow motion display (reopen webcam)
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Error: Could not reopen webcam.")
+    exit()
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    cv2.imshow('Slow Motion (Press ESC to continue)', frame)
+    if cv2.waitKey(60) & 0xFF == 27:  # Longer delay => slower playback
+        break
+
+cv2.destroyAllWindows()
+
+# Fast motion display (reopen webcam)
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Error: Could not reopen webcam.")
+    exit()
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    cv2.imshow('Fast Motion (Press ESC to exit)', frame)
+    if cv2.waitKey(10) & 0xFF == 27:  # Shorter delay => faster playback
+        break
+
+cap.release()
+cv2.destroyAllWindows()
