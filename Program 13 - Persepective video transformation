@@ -1,0 +1,21 @@
+import cv2
+import numpy as np
+
+cap = cv2.VideoCapture(0)
+img = cv2.imread("C:/Users/hp/Pictures/capture.png")
+rows, cols, ch = img.shape
+pts1 = np.float32([[50,50],[200,50],[50,200],[200,200]])
+pts2 = np.float32([[10,100],[200,50],[100,250],[290,220]])
+M = cv2.getPerspectiveTransform(pts1,pts2)
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    warped = cv2.warpPerspective(frame, M, (cols, rows))
+    cv2.imshow('Perspective Transformed Video', warped)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
